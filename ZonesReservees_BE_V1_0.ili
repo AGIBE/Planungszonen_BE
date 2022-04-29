@@ -1,0 +1,94 @@
+INTERLIS 2.3;
+
+/** Modèle de géodonnées "Zones réservées dans le canton de Berne"
+ */
+
+!! Version    | Who   | Modification
+!!------------------------------------------------------------------------------
+!! 2022-01-01 | OACOT | Version 1.0
+!!------------------------------------------------------------------------------
+
+!!@ technicalContact=mailto:OundR.AGR@be.ch
+!!@ furtherInformation=https://www.be.ch/agr
+
+MODEL ZonesReservees_BE_V1_0 (fr)
+  AT "http://models.geo.be.ch/Grundlagen_und_Planung/Raumplanung_Grundstueckskataster/"
+  VERSION "2022-01-01"
+  TRANSLATION OF Planungszonen_BE_V1_0 ["2022-01-01"] =
+  IMPORTS GeometryCHLV95_V1;
+
+  DOMAIN
+
+    Surface = SURFACE WITH (ARCS,STRAIGHTS) VERTEX GeometryCHLV95_V1.Coord2 WITHOUT OVERLAPS>0.05;
+
+    Niveau_legislatif = (
+      Canton,
+      Region,
+      Commune
+    );
+
+    Genre_legal = (
+      disposition_juridique,
+      renvoi
+    );
+
+  STRUCTURE BilingueText200 =
+    Text : MANDATORY TEXT*200;
+    Language : MANDATORY (de,fr);
+  END BilingueText200;
+
+  STRUCTURE BilingueText80 =
+    Text : MANDATORY TEXT*80;
+    Language : MANDATORY (de,fr);
+  END BilingueText80;
+
+  STRUCTURE BilingueText12 =
+    Text : MANDATORY TEXT*12;
+    Language : MANDATORY (de,fr);
+  END BilingueText12;
+
+  TOPIC ZonesReservees =
+    BASKET OID AS INTERLIS.UUIDOID;
+    OID AS INTERLIS.UUIDOID;
+
+    CLASS Document =
+      Genre_legal : MANDATORY ZonesReservees_BE_V1_0.Genre_legal;
+      Titre : BAG {1..2} OF BilingueText200;
+      Abreviation : BAG {0..2} OF BilingueText12;
+      NoOfficiel : BAG {0..2} OF BilingueText200;
+      Nom_du_fichier_PDF : BAG {1..2} OF BilingueText200;
+      publieDepuis : MANDATORY INTERLIS.XMLDate;
+      publieJusque : MANDATORY INTERLIS.XMLDate;
+    UNIQUE (LOCAL) Titre: Language;
+    UNIQUE (LOCAL) Abreviation: Language;
+    UNIQUE (LOCAL) NoOfficiel: Language;
+    UNIQUE (LOCAL) Nom_du_fichier_PDF: Language;
+    END Document;
+
+    CLASS Type_ZoneReservee =
+      Designation : BAG {1..2} OF BilingueText80;
+      Abreviation : BAG {1..2} OF BilingueText12;
+      Niveau_legislatif : MANDATORY ZonesReservees_BE_V1_0.Niveau_legislatif;
+    UNIQUE (LOCAL) Designation: Language;
+    UNIQUE (LOCAL) Abreviation: Language;
+    END Type_ZoneReservee;
+
+    CLASS ZoneReservee =
+      Geometrie : MANDATORY ZonesReservees_BE_V1_0.Surface;
+      publieDepuis : MANDATORY INTERLIS.XMLDate;
+      publieJusque : MANDATORY INTERLIS.XMLDate;
+    END ZoneReservee;
+
+    ASSOCIATION TypeZR_Document =
+      TypeZR -- {0..*} Type_ZoneReservee;
+      Disposition -- {1..*} Document;
+    END TypeZR_Document;
+
+    ASSOCIATION TypeZR_ZoneReservee =
+      ZoneReservee -- {0..*} ZoneReservee;
+      TypeZR -<> {1} Type_ZoneReservee;
+    END TypeZR_ZoneReservee;
+
+  END ZonesReservees;
+
+END ZonesReservees_BE_V1_0.

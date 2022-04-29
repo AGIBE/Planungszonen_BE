@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Fiktive Daten, passend zum Modell Planungszonen_BE_V1_0 -->
+
+<TRANSFER xmlns="http://www.interlis.ch/INTERLIS2.3">
+  <HEADERSECTION SENDER="AGR Kanton Bern" VERSION="2.3">
+    <MODELS>
+      <MODEL NAME="GeometryCHLV95_V1"                   VERSION="2017-12-04" URI="https://www.geo.admin.ch"></MODEL>
+      <MODEL NAME="Planungszonen_BE_V1_0"             VERSION="2022-01-01" URI="http://models.geo.be.ch"></MODEL>
+    </MODELS>
+  </HEADERSECTION>
+
+  <DATASECTION>
+
+    <Planungszonen_BE_V1_0.Planungszonen BID="76cbe329-788a-4f99-888d-8767c9fc7e79">
+
+      <Planungszonen_BE_V1_0.Planungszonen.Dokument TID="7e66b311-8c2f-4738-9340-9cb43efb61bf">
+        <Art_Rechtlich>Rechtsvorschrift</Art_Rechtlich>
+        <Titel>
+          <Planungszonen_BE_V1_0.BilingueText200>
+            <Language>de</Language>
+            <Text>Titel des Reglements zur Planungszone</Text>
+          </Planungszonen_BE_V1_0.BilingueText200>
+          <Planungszonen_BE_V1_0.BilingueText200>
+            <Language>fr</Language>
+            <Text>Titre du règlement de la zone réservée</Text>
+          </Planungszonen_BE_V1_0.BilingueText200>
+        </Titel>
+        <Abkuerzung>
+          <Planungszonen_BE_V1_0.BilingueText12>
+            <Language>de</Language>
+            <Text>RPZ</Text>
+          </Planungszonen_BE_V1_0.BilingueText12>
+          <Planungszonen_BE_V1_0.BilingueText12>
+            <Language>fr</Language>
+            <Text>RZR</Text>
+          </Planungszonen_BE_V1_0.BilingueText12>
+        </Abkuerzung>
+        <OffizielleNr>
+          <Planungszonen_BE_V1_0.BilingueText200>
+            <Language>de</Language>
+            <Text>Nummer des Reglements</Text>
+          </Planungszonen_BE_V1_0.BilingueText200>
+          <Planungszonen_BE_V1_0.BilingueText200>
+            <Language>fr</Language>
+            <Text>Numéro du règlement</Text>
+          </Planungszonen_BE_V1_0.BilingueText200>
+        </OffizielleNr>
+        <PDF_Dateiname>
+          <Planungszonen_BE_V1_0.BilingueText200>
+            <Language>de</Language>
+            <Text>reglement_pz.pdf</Text>
+          </Planungszonen_BE_V1_0.BilingueText200>
+          <Planungszonen_BE_V1_0.BilingueText200>
+            <Language>fr</Language>
+            <Text>reglement_zr.pdf</Text>
+          </Planungszonen_BE_V1_0.BilingueText200>
+        </PDF_Dateiname>
+        <publiziertAb>2022-01-01</publiziertAb>
+        <publiziertBis>2024-01-01</publiziertBis>
+      </Planungszonen_BE_V1_0.Planungszonen.Dokument>
+
+      <Planungszonen_BE_V1_0.Planungszonen.Typ_Planungszone TID="00000000-0000-0000-0001-000000000001">
+        <Bezeichnung>
+          <Planungszonen_BE_V1_0.BilingueText80>
+            <Language>de</Language>
+            <Text>Bezeichnung der Planungszone (nur de)</Text>
+          </Planungszonen_BE_V1_0.BilingueText80>
+        </Bezeichnung>
+        <Abkuerzung>
+          <Planungszonen_BE_V1_0.BilingueText12>
+            <Language>de</Language>
+            <Text>pz (nur de)</Text>
+          </Planungszonen_BE_V1_0.BilingueText12>
+        </Abkuerzung>
+        <Festlegung_Stufe>Gemeinde</Festlegung_Stufe>
+      </Planungszonen_BE_V1_0.Planungszonen.Typ_Planungszone>
+
+      <Planungszonen_BE_V1_0.Planungszonen.TypPZ_Dokument>
+        <Vorschrift REF="7e66b311-8c2f-4738-9340-9cb43efb61bf"></Vorschrift>
+        <TypPZ REF="00000000-0000-0000-0001-000000000001"></TypPZ>
+      </Planungszonen_BE_V1_0.Planungszonen.TypPZ_Dokument>
+
+      <Planungszonen_BE_V1_0.Planungszonen.Planungszone TID="00000000-0000-0000-0000-000000000002">
+        <TypPZ REF="00000000-0000-0000-0001-000000000001"></TypPZ>
+        <publiziertAb>2022-01-01</publiziertAb>
+        <publiziertBis>2024-01-01</publiziertBis>
+        <Geometrie>
+          <SURFACE>
+            <BOUNDARY> 
+              <POLYLINE>
+                <COORD>
+                  <C1>2600000.0</C1>
+                  <C2>1200010.0</C2>
+                </COORD>
+                <COORD>
+                  <C1>2600000.0</C1>
+                  <C2>1200020.0</C2>
+                </COORD>
+                <COORD>
+                  <C1>2600010.0</C1>
+                  <C2>1200020.0</C2>
+                </COORD>
+                <COORD>
+                  <C1>2600010.0</C1>
+                  <C2>1200010.0</C2>
+                </COORD>
+                <COORD>
+                  <C1>2600000.0</C1>
+                  <C2>1200010.0</C2>
+                </COORD>
+              </POLYLINE>
+            </BOUNDARY> 
+          </SURFACE>
+        </Geometrie>
+      </Planungszonen_BE_V1_0.Planungszonen.Planungszone>
+
+    </Planungszonen_BE_V1_0.Planungszonen>
+  </DATASECTION>
+</TRANSFER>

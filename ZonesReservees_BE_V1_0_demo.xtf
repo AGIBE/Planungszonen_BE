@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Données fictives, adaptées au modèle ZonesReservees_BE_V1_0 -->
+
+<TRANSFER xmlns="http://www.interlis.ch/INTERLIS2.3">
+  <HEADERSECTION SENDER="AGR Kanton Bern" VERSION="2.3">
+    <MODELS>
+      <MODEL NAME="GeometryCHLV95_V1"                   VERSION="2017-12-04" URI="https://www.geo.admin.ch"></MODEL>
+      <MODEL NAME="ZonesReservees_BE_V1_0"             VERSION="2022-01-01" URI="http://models.geo.be.ch"></MODEL>
+    </MODELS>
+  </HEADERSECTION>
+
+  <DATASECTION>
+
+    <ZonesReservees_BE_V1_0.ZonesReservees BID="76cbe329-788a-4f99-888d-8767c9fc7e79">
+
+      <ZonesReservees_BE_V1_0.ZonesReservees.Document TID="7e66b311-8c2f-4738-9340-9cb43efb61bf">
+        <Genre_legal>disposition_juridique</Genre_legal>
+        <Titre>
+          <ZonesReservees_BE_V1_0.BilingueText200>
+            <Language>de</Language>
+            <Text>Titel des Reglements zur Planungszone</Text>
+          </ZonesReservees_BE_V1_0.BilingueText200>
+          <ZonesReservees_BE_V1_0.BilingueText200>
+            <Language>fr</Language>
+            <Text>Titre du règlement de la zone réservée</Text>
+          </ZonesReservees_BE_V1_0.BilingueText200>
+        </Titre>
+        <Abreviation>
+          <ZonesReservees_BE_V1_0.BilingueText12>
+            <Language>de</Language>
+            <Text>RPZ</Text>
+          </ZonesReservees_BE_V1_0.BilingueText12>
+          <ZonesReservees_BE_V1_0.BilingueText12>
+            <Language>fr</Language>
+            <Text>RZR</Text>
+          </ZonesReservees_BE_V1_0.BilingueText12>
+        </Abreviation>
+        <NoOfficiel>
+          <ZonesReservees_BE_V1_0.BilingueText200>
+            <Language>de</Language>
+            <Text>Nummer des Reglements</Text>
+          </ZonesReservees_BE_V1_0.BilingueText200>
+          <ZonesReservees_BE_V1_0.BilingueText200>
+            <Language>fr</Language>
+            <Text>Numéro du règlement</Text>
+          </ZonesReservees_BE_V1_0.BilingueText200>
+        </NoOfficiel>
+        <Nom_du_fichier_PDF>
+          <ZonesReservees_BE_V1_0.BilingueText200>
+            <Language>de</Language>
+            <Text>reglement_pz.pdf</Text>
+          </ZonesReservees_BE_V1_0.BilingueText200>
+          <ZonesReservees_BE_V1_0.BilingueText200>
+            <Language>fr</Language>
+            <Text>reglement_zr.pdf</Text>
+          </ZonesReservees_BE_V1_0.BilingueText200>
+        </Nom_du_fichier_PDF>
+        <publieDepuis>2022-01-01</publieDepuis>
+        <publieJusque>2024-01-01</publieJusque>
+      </ZonesReservees_BE_V1_0.ZonesReservees.Document>
+
+      <ZonesReservees_BE_V1_0.ZonesReservees.Type_ZoneReservee TID="00000000-0000-0000-0001-000000000001">
+        <Designation>
+          <ZonesReservees_BE_V1_0.BilingueText80>
+            <Language>fr</Language>
+            <Text>Designation de la zone réservée</Text>
+          </ZonesReservees_BE_V1_0.BilingueText80>
+        </Designation>
+        <Abreviation>
+          <ZonesReservees_BE_V1_0.BilingueText12>
+            <Language>fr</Language>
+            <Text>zr</Text>
+          </ZonesReservees_BE_V1_0.BilingueText12>
+        </Abreviation>
+        <Niveau_legislatif>Commune</Niveau_legislatif>
+      </ZonesReservees_BE_V1_0.ZonesReservees.Type_ZoneReservee>
+
+      <ZonesReservees_BE_V1_0.ZonesReservees.TypeZR_Document>
+        <Disposition REF="7e66b311-8c2f-4738-9340-9cb43efb61bf"></Disposition>
+        <TypeZR REF="00000000-0000-0000-0001-000000000001"></TypeZR>
+      </ZonesReservees_BE_V1_0.ZonesReservees.TypeZR_Document>
+
+      <ZonesReservees_BE_V1_0.ZonesReservees.ZoneReservee TID="00000000-0000-0000-0000-000000000002">
+        <TypeZR REF="00000000-0000-0000-0001-000000000001"></TypeZR>
+        <publieDepuis>2022-01-01</publieDepuis>
+        <publieJusque>2024-01-01</publieJusque>
+        <Geometrie>
+          <SURFACE>
+            <BOUNDARY> 
+              <POLYLINE>
+                <COORD>
+                  <C1>2600000.0</C1>
+                  <C2>1200010.0</C2>
+                </COORD>
+                <COORD>
+                  <C1>2600000.0</C1>
+                  <C2>1200020.0</C2>
+                </COORD>
+                <COORD>
+                  <C1>2600010.0</C1>
+                  <C2>1200020.0</C2>
+                </COORD>
+                <COORD>
+                  <C1>2600010.0</C1>
+                  <C2>1200010.0</C2>
+                </COORD>
+                <COORD>
+                  <C1>2600000.0</C1>
+                  <C2>1200010.0</C2>
+                </COORD>
+              </POLYLINE>
+            </BOUNDARY> 
+          </SURFACE>
+        </Geometrie>
+      </ZonesReservees_BE_V1_0.ZonesReservees.ZoneReservee>
+
+    </ZonesReservees_BE_V1_0.ZonesReservees>
+  </DATASECTION>
+</TRANSFER>
