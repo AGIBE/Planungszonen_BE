@@ -6,7 +6,7 @@ INTERLIS 2.3;
 
 !! Version    | Who   | Modification
 !!------------------------------------------------------------------------------
-!! 2022-01-01 | AGR   | Version 1.0
+!! 2022-05-01 | AGR   | Version 1.0
 !!------------------------------------------------------------------------------
 
 !!@ technicalContact=mailto:OundR.AGR@be.ch
@@ -14,7 +14,7 @@ INTERLIS 2.3;
 
 MODEL Planungszonen_BE_V1_0 (de)
   AT "https://models.geo.be.ch/Grundlagen_und_Planung/Raumplanung_Grundstueckskataster/"
-  VERSION "2022-04-29"  =
+  VERSION "2022-05-01"  =
   IMPORTS GeometryCHLV95_V1;
 
   DOMAIN
@@ -80,12 +80,12 @@ MODEL Planungszonen_BE_V1_0 (de)
     END Planungszone;
 
     ASSOCIATION TypPZ_Dokument =
-      TypPZ -- {0..*} Typ_Planungszone;
+      TypPZ -- {1..*} Typ_Planungszone;
       Vorschrift -- {1..*} Dokument;
     END TypPZ_Dokument;
 
     ASSOCIATION TypPZ_Planungszone =
-      Planungszone -- {0..*} Planungszone;
+      Planungszone -- {1..*} Planungszone;
       TypPZ -<> {1} Typ_Planungszone;
     END TypPZ_Planungszone;
 

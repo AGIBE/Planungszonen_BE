@@ -5,7 +5,7 @@ INTERLIS 2.3;
 
 !! Version    | Who   | Modification
 !!------------------------------------------------------------------------------
-!! 2022-01-01 | OACOT | Version 1.0
+!! 2022-05-01 | OACOT | Version 1.0
 !!------------------------------------------------------------------------------
 
 !!@ technicalContact=mailto:OundR.AGR@be.ch
@@ -13,8 +13,8 @@ INTERLIS 2.3;
 
 MODEL ZonesReservees_BE_V1_0 (fr)
   AT "https://models.geo.be.ch/Grundlagen_und_Planung/Raumplanung_Grundstueckskataster/"
-  VERSION "2022-04-29"
-  TRANSLATION OF Planungszonen_BE_V1_0 ["2022-04-29"] =
+  VERSION "2022-05-01"
+  TRANSLATION OF Planungszonen_BE_V1_0 ["2022-05-01"] =
   IMPORTS GeometryCHLV95_V1;
 
   DOMAIN
@@ -80,12 +80,12 @@ MODEL ZonesReservees_BE_V1_0 (fr)
     END ZoneReservee;
 
     ASSOCIATION TypeZR_Document =
-      TypeZR -- {0..*} Type_ZoneReservee;
+      TypeZR -- {1..*} Type_ZoneReservee;
       Disposition -- {1..*} Document;
     END TypeZR_Document;
 
     ASSOCIATION TypeZR_ZoneReservee =
-      ZoneReservee -- {0..*} ZoneReservee;
+      ZoneReservee -- {1..*} ZoneReservee;
       TypeZR -<> {1} Type_ZoneReservee;
     END TypeZR_ZoneReservee;
 
