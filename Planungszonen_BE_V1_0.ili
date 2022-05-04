@@ -6,7 +6,7 @@ INTERLIS 2.3;
 
 !! Version    | Who   | Modification
 !!------------------------------------------------------------------------------
-!! 2022-05-01 | AGR   | Version 1.0
+!! 2022-05-04 | AGR   | Version 1.0
 !!------------------------------------------------------------------------------
 
 !!@ technicalContact=mailto:OundR.AGR@be.ch
@@ -14,7 +14,7 @@ INTERLIS 2.3;
 
 MODEL Planungszonen_BE_V1_0 (de)
   AT "https://models.geo.be.ch/Grundlagen_und_Planung/Raumplanung_Grundstueckskataster/"
-  VERSION "2022-05-01"  =
+  VERSION "2022-05-04"  =
   IMPORTS GeometryCHLV95_V1;
 
   DOMAIN
@@ -59,24 +59,18 @@ MODEL Planungszonen_BE_V1_0 (de)
       PDF_Dateiname : BAG {1..2} OF BilingueText200;
       publiziertAb : MANDATORY INTERLIS.XMLDate;
       publiziertBis : MANDATORY INTERLIS.XMLDate;
-    UNIQUE (LOCAL) Titel: Language;
-    UNIQUE (LOCAL) Abkuerzung: Language;
-    UNIQUE (LOCAL) OffizielleNr: Language;
-    UNIQUE (LOCAL) PDF_Dateiname: Language;
     END Dokument;
 
     CLASS Typ_Planungszone =
       Bezeichnung : BAG {1..2} OF BilingueText80;
       Abkuerzung : BAG {1..2} OF BilingueText12;
       Festlegung_Stufe : MANDATORY Planungszonen_BE_V1_0.Festlegung_Stufe;
-    UNIQUE (LOCAL) Bezeichnung: Language;
-    UNIQUE (LOCAL) Abkuerzung: Language;
     END Typ_Planungszone;
 
     CLASS Planungszone =
-      Geometrie : MANDATORY Planungszonen_BE_V1_0.Surface;
       publiziertAb : MANDATORY INTERLIS.XMLDate;
       publiziertBis : MANDATORY INTERLIS.XMLDate;
+      Geometrie : MANDATORY Planungszonen_BE_V1_0.Surface;
     END Planungszone;
 
     ASSOCIATION TypPZ_Dokument =
@@ -88,6 +82,32 @@ MODEL Planungszonen_BE_V1_0 (de)
       Planungszone -- {1..*} Planungszone;
       TypPZ -<> {1} Typ_Planungszone;
     END TypPZ_Planungszone;
+
+    !! Konsistenzbedingungen
+    !! ---------------------
+
+    CONSTRAINTS OF Dokument =
+      !!@ ilivalid.msg = "publiziertBis muss grösser sein als publiziertAb."
+      SET CONSTRAINT publiziertAb < publiziertBis;
+      !! Bei zweisprachigen Attributen muss angegeben werden, ob ein Eintrag in der Sprache "de" oder "fr" erfasst wurde.
+      !! Werden beide Sprachen erfasst, muss zwingend ein Eintrag mit "de" und der andere mit "fr" gekennzeichnet werden.
+      UNIQUE (LOCAL) Titel: Language;
+      UNIQUE (LOCAL) Abkuerzung: Language;
+      UNIQUE (LOCAL) OffizielleNr: Language;
+      UNIQUE (LOCAL) PDF_Dateiname: Language;
+    END;
+
+    CONSTRAINTS OF Typ_Planungszone =
+      !! Bei zweisprachigen Attributen muss angegeben werden, ob ein Eintrag in der Sprache "de" oder "fr" erfasst wurde.
+      !! Werden beide Sprachen erfasst, muss zwingend ein Eintrag mit "de" und der andere mit "fr" gekennzeichnet werden.
+      UNIQUE (LOCAL) Bezeichnung: Language;
+      UNIQUE (LOCAL) Abkuerzung: Language;
+    END;
+
+    CONSTRAINTS OF Planungszone =
+      !!@ ilivalid.msg = "publiziertBis muss grösser sein als publiziertAb."
+      SET CONSTRAINT publiziertAb < publiziertBis;
+    END;
 
   END Planungszonen;
 

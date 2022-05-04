@@ -5,7 +5,7 @@ INTERLIS 2.3;
 
 !! Version    | Who   | Modification
 !!------------------------------------------------------------------------------
-!! 2022-05-01 | OACOT | Version 1.0
+!! 2022-05-04 | OACOT | Version 1.0
 !!------------------------------------------------------------------------------
 
 !!@ technicalContact=mailto:OundR.AGR@be.ch
@@ -13,8 +13,8 @@ INTERLIS 2.3;
 
 MODEL ZonesReservees_BE_V1_0 (fr)
   AT "https://models.geo.be.ch/Grundlagen_und_Planung/Raumplanung_Grundstueckskataster/"
-  VERSION "2022-05-01"
-  TRANSLATION OF Planungszonen_BE_V1_0 ["2022-05-01"] =
+  VERSION "2022-05-04"
+  TRANSLATION OF Planungszonen_BE_V1_0 ["2022-05-04"] =
   IMPORTS GeometryCHLV95_V1;
 
   DOMAIN
@@ -59,24 +59,18 @@ MODEL ZonesReservees_BE_V1_0 (fr)
       Nom_du_fichier_PDF : BAG {1..2} OF BilingueText200;
       publieDepuis : MANDATORY INTERLIS.XMLDate;
       publieJusque : MANDATORY INTERLIS.XMLDate;
-    UNIQUE (LOCAL) Titre: Language;
-    UNIQUE (LOCAL) Abreviation: Language;
-    UNIQUE (LOCAL) NoOfficiel: Language;
-    UNIQUE (LOCAL) Nom_du_fichier_PDF: Language;
     END Document;
 
     CLASS Type_ZoneReservee =
       Designation : BAG {1..2} OF BilingueText80;
       Abreviation : BAG {1..2} OF BilingueText12;
       Niveau_legislatif : MANDATORY ZonesReservees_BE_V1_0.Niveau_legislatif;
-    UNIQUE (LOCAL) Designation: Language;
-    UNIQUE (LOCAL) Abreviation: Language;
     END Type_ZoneReservee;
 
     CLASS ZoneReservee =
-      Geometrie : MANDATORY ZonesReservees_BE_V1_0.Surface;
       publieDepuis : MANDATORY INTERLIS.XMLDate;
       publieJusque : MANDATORY INTERLIS.XMLDate;
+      Geometrie : MANDATORY ZonesReservees_BE_V1_0.Surface;
     END ZoneReservee;
 
     ASSOCIATION TypeZR_Document =
@@ -88,6 +82,32 @@ MODEL ZonesReservees_BE_V1_0 (fr)
       ZoneReservee -- {1..*} ZoneReservee;
       TypeZR -<> {1} Type_ZoneReservee;
     END TypeZR_ZoneReservee;
+
+    !! Conditions de cohérence
+    !! -----------------------
+
+    CONSTRAINTS OF Document =
+      !!@ ilivalid.msg = "publieJusque doit être plus grand que publieDepuis."
+      SET CONSTRAINT publieDepuis < publieJusque;
+      !! Pour les attributs bilingues, il faut indiquer si une entrée a été saisie dans la langue "de" ou "fr".
+      !! Si les deux langues sont saisies, une entrée doit impérativement être indiquée avec "de" et l'autre avec "fr".
+      UNIQUE (LOCAL) Titre: Language;
+      UNIQUE (LOCAL) Abreviation: Language;
+      UNIQUE (LOCAL) NoOfficiel: Language;
+      UNIQUE (LOCAL) Nom_du_fichier_PDF: Language;
+    END;
+
+    CONSTRAINTS OF Type_ZoneReservee =
+      !! Pour les attributs bilingues, il faut indiquer si une entrée a été saisie dans la langue "de" ou "fr".
+      !! Si les deux langues sont saisies, une entrée doit impérativement être indiquée avec "de" et l'autre avec "fr".    
+      UNIQUE (LOCAL) Designation: Language;
+      UNIQUE (LOCAL) Abreviation: Language;
+    END;
+
+    CONSTRAINTS OF ZoneReservee =
+      !!@ ilivalid.msg = "publieJusque doit être plus grand que publieDepuis."
+      SET CONSTRAINT publieDepuis < publieJusque;
+    END;
 
   END ZonesReservees;
 
