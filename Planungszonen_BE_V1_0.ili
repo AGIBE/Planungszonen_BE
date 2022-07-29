@@ -6,7 +6,7 @@ INTERLIS 2.3;
 
 !! Version    | Who   | Modification
 !!------------------------------------------------------------------------------
-!! 2022-05-04 | AGR   | Version 1.0
+!! 2022-08-01 | AGR   | Version 1.0
 !!------------------------------------------------------------------------------
 
 !!@ technicalContact=mailto:OundR.AGR@be.ch
@@ -14,7 +14,7 @@ INTERLIS 2.3;
 
 MODEL Planungszonen_BE_V1_0 (de)
   AT "https://models.geo.be.ch/Grundlagen_und_Planung/Raumplanung_Grundstueckskataster/"
-  VERSION "2022-05-04"  =
+  VERSION "2022-08-01"  =
   IMPORTS GeometryCHLV95_V1;
 
   DOMAIN
@@ -32,79 +32,69 @@ MODEL Planungszonen_BE_V1_0 (de)
       Hinweis
     );
 
-  STRUCTURE BilingueText200 =
-    Text : MANDATORY TEXT*200;
-    Language : MANDATORY (de,fr);
-  END BilingueText200;
-
-  STRUCTURE BilingueText80 =
-    Text : MANDATORY TEXT*80;
-    Language : MANDATORY (de,fr);
-  END BilingueText80;
-
-  STRUCTURE BilingueText12 =
-    Text : MANDATORY TEXT*12;
-    Language : MANDATORY (de,fr);
-  END BilingueText12;
-
   TOPIC Planungszonen =
     BASKET OID AS INTERLIS.UUIDOID;
     OID AS INTERLIS.UUIDOID;
 
     CLASS Dokument =
       Art_Rechtlich : MANDATORY Planungszonen_BE_V1_0.Art_Rechtlich;
-      Titel : BAG {1..2} OF BilingueText200;
-      Abkuerzung : BAG {0..2} OF BilingueText12;
-      OffizielleNr : BAG {0..2} OF BilingueText200;
-      PDF_Dateiname : BAG {1..2} OF BilingueText200;
+      Titel_DE : TEXT*200;          !! Entweder dieses oder das nächste Attribut muss ausgefüllt sein (Konsistenzbedingung).
+      Titel_FR : TEXT*200;
+      Abkuerzung_DE : TEXT*12;
+      Abkuerzung_FR : TEXT*12;
+      OffizielleNr_DE : TEXT*200;
+      OffizielleNr_FR : TEXT*200;
+      PDF_Dateiname_DE : TEXT*200;  !! Entweder dieses oder das nächste Attribut muss ausgefüllt sein (Konsistenzbedingung).
+      PDF_Dateiname_FR : TEXT*200;
       publiziertAb : MANDATORY INTERLIS.XMLDate;
       publiziertBis : MANDATORY INTERLIS.XMLDate;
     END Dokument;
 
-    CLASS Typ_Planungszone =
-      Bezeichnung : BAG {1..2} OF BilingueText80;
-      Abkuerzung : BAG {1..2} OF BilingueText12;
+    CLASS Planungszone_Typ =
+      Bezeichnung_DE : TEXT*80;     !! Entweder dieses oder das nächste Attribut muss ausgefüllt sein (Konsistenzbedingung).
+      Bezeichnung_FR : TEXT*80;
+      Abkuerzung_DE : TEXT*12;      !! Entweder dieses oder das nächste Attribut muss ausgefüllt sein (Konsistenzbedingung).
+      Abkuerzung_FR : TEXT*12;
       Festlegung_Stufe : MANDATORY Planungszonen_BE_V1_0.Festlegung_Stufe;
-    END Typ_Planungszone;
+    END Planungszone_Typ;
 
-    CLASS Planungszone =
+    CLASS Planungszone_Geometrie =
       publiziertAb : MANDATORY INTERLIS.XMLDate;
       publiziertBis : MANDATORY INTERLIS.XMLDate;
       Geometrie : MANDATORY Planungszonen_BE_V1_0.Surface;
-    END Planungszone;
+    END Planungszone_Geometrie;
 
-    ASSOCIATION TypPZ_Dokument =
-      TypPZ -- {1..*} Typ_Planungszone;
+    ASSOCIATION Typ_Dokument =
+      Typ -- {1..*} Planungszone_Typ;
       Vorschrift -- {1..*} Dokument;
-    END TypPZ_Dokument;
+    END Typ_Dokument;
 
-    ASSOCIATION TypPZ_Planungszone =
-      Planungszone -- {1..*} Planungszone;
-      TypPZ -<> {1} Typ_Planungszone;
-    END TypPZ_Planungszone;
+    ASSOCIATION Typ_Geometrie =
+      Typ -<> {1} Planungszone_Typ;
+      Geometrie -- {1..*} Planungszone_Geometrie;
+    END Typ_Geometrie;
+
 
     !! Konsistenzbedingungen
     !! ---------------------
 
     CONSTRAINTS OF Dokument =
+      !!@ ilivalid.msg = "Entweder Titel_DE oder Titel_FR muss definiert sein."
+      SET CONSTRAINT DEFINED (Titel_DE) OR DEFINED (Titel_FR);
+      !!@ ilivalid.msg = "Entweder PDF_Dateiname_DE oder PDF_Dateiname_FR muss definiert sein."
+      SET CONSTRAINT DEFINED (PDF_Dateiname_DE) OR DEFINED (PDF_Dateiname_FR);
       !!@ ilivalid.msg = "publiziertBis muss grösser sein als publiziertAb."
       SET CONSTRAINT publiziertAb < publiziertBis;
-      !! Bei zweisprachigen Attributen muss angegeben werden, ob ein Eintrag in der Sprache "de" oder "fr" erfasst wurde.
-      !! Werden beide Sprachen erfasst, muss zwingend ein Eintrag mit "de" und der andere mit "fr" gekennzeichnet werden.
-      UNIQUE (LOCAL) Titel: Language;
-      UNIQUE (LOCAL) Abkuerzung: Language;
-      UNIQUE (LOCAL) OffizielleNr: Language;
-      UNIQUE (LOCAL) PDF_Dateiname: Language;
     END;
 
-    CONSTRAINTS OF Typ_Planungszone =
-      !! Bei zweisprachigen Attributen muss angegeben werden, ob ein Eintrag in der Sprache "de" oder "fr" erfasst wurde.
-      !! Werden beide Sprachen erfasst, muss zwingend ein Eintrag mit "de" und der andere mit "fr" gekennzeichnet werden.
-      UNIQUE (LOCAL) Bezeichnung: Language;
-      UNIQUE (LOCAL) Abkuerzung: Language;
+    CONSTRAINTS OF Planungszone_Typ =
+      !!@ ilivalid.msg = "Entweder Bezeichnung_DE oder Bezeichnung_FR muss definiert sein."
+      SET CONSTRAINT DEFINED (Bezeichnung_DE) OR DEFINED (Bezeichnung_FR);
+      !!@ ilivalid.msg = "Entweder Abkuerzung_DE oder Abkuerzung_FR muss definiert sein."
+      SET CONSTRAINT DEFINED (Abkuerzung_DE) OR DEFINED (Abkuerzung_FR);
     END;
 
-    CONSTRAINTS OF Planungszone =
+    CONSTRAINTS OF Planungszone_Geometrie =
       !!@ ilivalid.msg = "publiziertBis muss grösser sein als publiziertAb."
       SET CONSTRAINT publiziertAb < publiziertBis;
     END;

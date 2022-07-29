@@ -13,75 +13,34 @@
 
     <ZonesReservees_BE_V1_0.ZonesReservees BID="76cbe329-788a-4f99-888d-8767c9fc7e79">
 
-      <ZonesReservees_BE_V1_0.ZonesReservees.Document TID="7e66b311-8c2f-4738-9340-9cb43efb61bf">
+      <ZonesReservees_BE_V1_0.ZonesReservees.Document TID="dda3e623-a560-414d-91f9-31cbc95ed032">
         <Genre_legal>disposition_juridique</Genre_legal>
-        <Titre>
-          <ZonesReservees_BE_V1_0.BilingueText200>
-            <Language>de</Language>
-            <Text>Titel des Reglements zur Planungszone</Text>
-          </ZonesReservees_BE_V1_0.BilingueText200>
-          <ZonesReservees_BE_V1_0.BilingueText200>
-            <Language>fr</Language>
-            <Text>Titre du règlement de la zone réservée</Text>
-          </ZonesReservees_BE_V1_0.BilingueText200>
-        </Titre>
-        <Abreviation>
-          <ZonesReservees_BE_V1_0.BilingueText12>
-            <Language>de</Language>
-            <Text>RPZ</Text>
-          </ZonesReservees_BE_V1_0.BilingueText12>
-          <ZonesReservees_BE_V1_0.BilingueText12>
-            <Language>fr</Language>
-            <Text>RZR</Text>
-          </ZonesReservees_BE_V1_0.BilingueText12>
-        </Abreviation>
-        <NoOfficiel>
-          <ZonesReservees_BE_V1_0.BilingueText200>
-            <Language>de</Language>
-            <Text>Nummer des Reglements</Text>
-          </ZonesReservees_BE_V1_0.BilingueText200>
-          <ZonesReservees_BE_V1_0.BilingueText200>
-            <Language>fr</Language>
-            <Text>Numéro du règlement</Text>
-          </ZonesReservees_BE_V1_0.BilingueText200>
-        </NoOfficiel>
-        <Nom_du_fichier_PDF>
-          <ZonesReservees_BE_V1_0.BilingueText200>
-            <Language>de</Language>
-            <Text>reglement_pz.pdf</Text>
-          </ZonesReservees_BE_V1_0.BilingueText200>
-          <ZonesReservees_BE_V1_0.BilingueText200>
-            <Language>fr</Language>
-            <Text>reglement_zr.pdf</Text>
-          </ZonesReservees_BE_V1_0.BilingueText200>
-        </Nom_du_fichier_PDF>
+        <Titre_DE>Reglement der Planungszone xy</Titre_DE>
+        <Titre_DE>Règlement de la zone réservée xy</Titre_DE>
+        <Abreviation_DE>PZ xy</Abreviation_DE>
+        <Abreviation_FR>ZR xy</Abreviation_FR>
+        <NoOfficiel_DE>abc.1.2.3</NoOfficiel_DE>
+        <NoOfficiel_FR>abc.1.2.3</NoOfficiel_FR>
+        <Nom_du_fichier_PDF_DE>planungszone_xy.pdf</Nom_du_fichier_PDF_DE>
+        <Nom_du_fichier_PDF_FR>zone_reservee_xy.pdf</Nom_du_fichier_PDF_FR>
         <publieDepuis>2022-01-01</publieDepuis>
         <publieJusque>2024-01-01</publieJusque>
       </ZonesReservees_BE_V1_0.ZonesReservees.Document>
 
-      <ZonesReservees_BE_V1_0.ZonesReservees.Type_ZoneReservee TID="00000000-0000-0000-0001-000000000001">
-        <Designation>
-          <ZonesReservees_BE_V1_0.BilingueText80>
-            <Language>fr</Language>
-            <Text>Designation de la zone réservée</Text>
-          </ZonesReservees_BE_V1_0.BilingueText80>
-        </Designation>
-        <Abreviation>
-          <ZonesReservees_BE_V1_0.BilingueText12>
-            <Language>fr</Language>
-            <Text>zr</Text>
-          </ZonesReservees_BE_V1_0.BilingueText12>
-        </Abreviation>
+      <ZonesReservees_BE_V1_0.ZonesReservees.ZoneReservee_Type TID="67802c0f-df76-4ad8-97d0-4c23a119224a">
+        <Designation_DE>Planungszone xy</Designation_DE>
+        <Designation_FR>Zone réservée xy</Designation_FR>
+        <Abreviation_DE>PZ xy</Abreviation_DE>
+        <Abreviation_FR>ZR xy</Abreviation_FR>
         <Niveau_legislatif>Commune</Niveau_legislatif>
-      </ZonesReservees_BE_V1_0.ZonesReservees.Type_ZoneReservee>
+      </ZonesReservees_BE_V1_0.ZonesReservees.ZoneReservee_Type>
 
-      <ZonesReservees_BE_V1_0.ZonesReservees.TypeZR_Document>
-        <Disposition REF="7e66b311-8c2f-4738-9340-9cb43efb61bf"></Disposition>
-        <TypeZR REF="00000000-0000-0000-0001-000000000001"></TypeZR>
-      </ZonesReservees_BE_V1_0.ZonesReservees.TypeZR_Document>
+      <ZonesReservees_BE_V1_0.ZonesReservees.Type_Document>
+        <Type REF="67802c0f-df76-4ad8-97d0-4c23a119224a"></Type>
+        <Disposition REF="dda3e623-a560-414d-91f9-31cbc95ed032"></Disposition>
+      </ZonesReservees_BE_V1_0.ZonesReservees.Type_Document>
 
-      <ZonesReservees_BE_V1_0.ZonesReservees.ZoneReservee TID="00000000-0000-0000-0000-000000000002">
-        <TypeZR REF="00000000-0000-0000-0001-000000000001"></TypeZR>
+      <ZonesReservees_BE_V1_0.ZonesReservees.ZoneReservee_Geometrie TID="f49b8087-60f5-4db8-9f17-6c2650ac82e0">
         <publieDepuis>2022-01-01</publieDepuis>
         <publieJusque>2024-01-01</publieJusque>
         <Geometrie>
@@ -112,7 +71,8 @@
             </BOUNDARY> 
           </SURFACE>
         </Geometrie>
-      </ZonesReservees_BE_V1_0.ZonesReservees.ZoneReservee>
+        <Type REF="67802c0f-df76-4ad8-97d0-4c23a119224a"></Type>
+      </ZonesReservees_BE_V1_0.ZonesReservees.ZoneReservee_Geometrie>
 
     </ZonesReservees_BE_V1_0.ZonesReservees>
   </DATASECTION>

@@ -13,75 +13,34 @@
 
     <Planungszonen_BE_V1_0.Planungszonen BID="76cbe329-788a-4f99-888d-8767c9fc7e79">
 
-      <Planungszonen_BE_V1_0.Planungszonen.Dokument TID="7e66b311-8c2f-4738-9340-9cb43efb61bf">
+      <Planungszonen_BE_V1_0.Planungszonen.Dokument TID="dda3e623-a560-414d-91f9-31cbc95ed032">
         <Art_Rechtlich>Rechtsvorschrift</Art_Rechtlich>
-        <Titel>
-          <Planungszonen_BE_V1_0.BilingueText200>
-            <Language>de</Language>
-            <Text>Titel des Reglements zur Planungszone</Text>
-          </Planungszonen_BE_V1_0.BilingueText200>
-          <Planungszonen_BE_V1_0.BilingueText200>
-            <Language>fr</Language>
-            <Text>Titre du règlement de la zone réservée</Text>
-          </Planungszonen_BE_V1_0.BilingueText200>
-        </Titel>
-        <Abkuerzung>
-          <Planungszonen_BE_V1_0.BilingueText12>
-            <Language>de</Language>
-            <Text>RPZ</Text>
-          </Planungszonen_BE_V1_0.BilingueText12>
-          <Planungszonen_BE_V1_0.BilingueText12>
-            <Language>fr</Language>
-            <Text>RZR</Text>
-          </Planungszonen_BE_V1_0.BilingueText12>
-        </Abkuerzung>
-        <OffizielleNr>
-          <Planungszonen_BE_V1_0.BilingueText200>
-            <Language>de</Language>
-            <Text>Nummer des Reglements</Text>
-          </Planungszonen_BE_V1_0.BilingueText200>
-          <Planungszonen_BE_V1_0.BilingueText200>
-            <Language>fr</Language>
-            <Text>Numéro du règlement</Text>
-          </Planungszonen_BE_V1_0.BilingueText200>
-        </OffizielleNr>
-        <PDF_Dateiname>
-          <Planungszonen_BE_V1_0.BilingueText200>
-            <Language>de</Language>
-            <Text>reglement_pz.pdf</Text>
-          </Planungszonen_BE_V1_0.BilingueText200>
-          <Planungszonen_BE_V1_0.BilingueText200>
-            <Language>fr</Language>
-            <Text>reglement_zr.pdf</Text>
-          </Planungszonen_BE_V1_0.BilingueText200>
-        </PDF_Dateiname>
+        <Titel_DE>Reglement der Planungszone xy</Titel_DE>
+        <Titel_DE>Règlement de la zone réservée xy</Titel_DE>
+        <Abkuerzung_DE>PZ xy</Abkuerzung_DE>
+        <Abkuerzung_FR>ZR xy</Abkuerzung_FR>
+        <OffizielleNr_DE>abc.1.2.3</OffizielleNr_DE>
+        <OffizielleNr_FR>abc.1.2.3</OffizielleNr_FR>
+        <PDF_Dateiname_DE>planungszone_xy.pdf</PDF_Dateiname_DE>
+        <PDF_Dateiname_FR>zone_reservee_xy.pdf</PDF_Dateiname_FR>
         <publiziertAb>2022-01-01</publiziertAb>
         <publiziertBis>2024-01-01</publiziertBis>
       </Planungszonen_BE_V1_0.Planungszonen.Dokument>
 
-      <Planungszonen_BE_V1_0.Planungszonen.Typ_Planungszone TID="00000000-0000-0000-0001-000000000001">
-        <Bezeichnung>
-          <Planungszonen_BE_V1_0.BilingueText80>
-            <Language>de</Language>
-            <Text>Bezeichnung der Planungszone (nur de)</Text>
-          </Planungszonen_BE_V1_0.BilingueText80>
-        </Bezeichnung>
-        <Abkuerzung>
-          <Planungszonen_BE_V1_0.BilingueText12>
-            <Language>de</Language>
-            <Text>pz (nur de)</Text>
-          </Planungszonen_BE_V1_0.BilingueText12>
-        </Abkuerzung>
+      <Planungszonen_BE_V1_0.Planungszonen.Planungszone_Typ TID="67802c0f-df76-4ad8-97d0-4c23a119224a">
+        <Bezeichnung_DE>Planungszone xy</Bezeichnung_DE>
+        <Bezeichnung_FR>Zone réservée xy</Bezeichnung_FR>
+        <Abkuerzung_DE>PZ xy</Abkuerzung_DE>
+        <Abkuerzung_FR>ZR xy</Abkuerzung_FR>
         <Festlegung_Stufe>Gemeinde</Festlegung_Stufe>
-      </Planungszonen_BE_V1_0.Planungszonen.Typ_Planungszone>
+      </Planungszonen_BE_V1_0.Planungszonen.Planungszone_Typ>
 
-      <Planungszonen_BE_V1_0.Planungszonen.TypPZ_Dokument>
-        <Vorschrift REF="7e66b311-8c2f-4738-9340-9cb43efb61bf"></Vorschrift>
-        <TypPZ REF="00000000-0000-0000-0001-000000000001"></TypPZ>
-      </Planungszonen_BE_V1_0.Planungszonen.TypPZ_Dokument>
+      <Planungszonen_BE_V1_0.Planungszonen.Typ_Dokument>
+        <Typ REF="67802c0f-df76-4ad8-97d0-4c23a119224a"></Typ>
+        <Vorschrift REF="dda3e623-a560-414d-91f9-31cbc95ed032"></Vorschrift>
+      </Planungszonen_BE_V1_0.Planungszonen.Typ_Dokument>
 
-      <Planungszonen_BE_V1_0.Planungszonen.Planungszone TID="00000000-0000-0000-0000-000000000002">
-        <TypPZ REF="00000000-0000-0000-0001-000000000001"></TypPZ>
+      <Planungszonen_BE_V1_0.Planungszonen.Planungszone_Geometrie TID="f49b8087-60f5-4db8-9f17-6c2650ac82e0">
         <publiziertAb>2022-01-01</publiziertAb>
         <publiziertBis>2024-01-01</publiziertBis>
         <Geometrie>
@@ -112,7 +71,8 @@
             </BOUNDARY> 
           </SURFACE>
         </Geometrie>
-      </Planungszonen_BE_V1_0.Planungszonen.Planungszone>
+        <Typ REF="67802c0f-df76-4ad8-97d0-4c23a119224a"></Typ>
+      </Planungszonen_BE_V1_0.Planungszonen.Planungszone_Geometrie>
 
     </Planungszonen_BE_V1_0.Planungszonen>
   </DATASECTION>

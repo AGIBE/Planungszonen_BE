@@ -5,7 +5,7 @@ INTERLIS 2.3;
 
 !! Version    | Who   | Modification
 !!------------------------------------------------------------------------------
-!! 2022-05-04 | OACOT | Version 1.0
+!! 2022-08-01 | OACOT | Version 1.0
 !!------------------------------------------------------------------------------
 
 !!@ technicalContact=mailto:OundR.AGR@be.ch
@@ -13,8 +13,8 @@ INTERLIS 2.3;
 
 MODEL ZonesReservees_BE_V1_0 (fr)
   AT "https://models.geo.be.ch/Grundlagen_und_Planung/Raumplanung_Grundstueckskataster/"
-  VERSION "2022-05-04"
-  TRANSLATION OF Planungszonen_BE_V1_0 ["2022-05-04"] =
+  VERSION "2022-08-01"
+  TRANSLATION OF Planungszonen_BE_V1_0 ["2022-08-01"] =
   IMPORTS GeometryCHLV95_V1;
 
   DOMAIN
@@ -32,79 +32,69 @@ MODEL ZonesReservees_BE_V1_0 (fr)
       renvoi
     );
 
-  STRUCTURE BilingueText200 =
-    Text : MANDATORY TEXT*200;
-    Language : MANDATORY (de,fr);
-  END BilingueText200;
-
-  STRUCTURE BilingueText80 =
-    Text : MANDATORY TEXT*80;
-    Language : MANDATORY (de,fr);
-  END BilingueText80;
-
-  STRUCTURE BilingueText12 =
-    Text : MANDATORY TEXT*12;
-    Language : MANDATORY (de,fr);
-  END BilingueText12;
-
   TOPIC ZonesReservees =
     BASKET OID AS INTERLIS.UUIDOID;
     OID AS INTERLIS.UUIDOID;
 
     CLASS Document =
       Genre_legal : MANDATORY ZonesReservees_BE_V1_0.Genre_legal;
-      Titre : BAG {1..2} OF BilingueText200;
-      Abreviation : BAG {0..2} OF BilingueText12;
-      NoOfficiel : BAG {0..2} OF BilingueText200;
-      Nom_du_fichier_PDF : BAG {1..2} OF BilingueText200;
+      Titre_DE : TEXT*200;              !! Soit cet attribut, soit le suivant doit être rempli (condition de cohérence).
+      Titre_FR : TEXT*200;
+      Abreviation_DE : TEXT*12;
+      Abreviation_FR : TEXT*12;
+      NoOfficiel_DE : TEXT*200;
+      NoOfficiel_FR : TEXT*200;
+      Nom_du_fichier_PDF_DE : TEXT*200; !! Soit cet attribut, soit le suivant doit être rempli (condition de cohérence).
+      Nom_du_fichier_PDF_FR : TEXT*200;
       publieDepuis : MANDATORY INTERLIS.XMLDate;
       publieJusque : MANDATORY INTERLIS.XMLDate;
     END Document;
 
-    CLASS Type_ZoneReservee =
-      Designation : BAG {1..2} OF BilingueText80;
-      Abreviation : BAG {1..2} OF BilingueText12;
+    CLASS ZoneReservee_Type =
+      Designation_DE : TEXT*80;         !! Soit cet attribut, soit le suivant doit être rempli (condition de cohérence).
+      Designation_FR : TEXT*80;
+      Abreviation_DE : TEXT*12;         !! Soit cet attribut, soit le suivant doit être rempli (condition de cohérence).
+      Abreviation_FR : TEXT*12;
       Niveau_legislatif : MANDATORY ZonesReservees_BE_V1_0.Niveau_legislatif;
-    END Type_ZoneReservee;
+    END ZoneReservee_Type;
 
-    CLASS ZoneReservee =
+    CLASS ZoneReservee_Geometrie =
       publieDepuis : MANDATORY INTERLIS.XMLDate;
       publieJusque : MANDATORY INTERLIS.XMLDate;
       Geometrie : MANDATORY ZonesReservees_BE_V1_0.Surface;
-    END ZoneReservee;
+    END ZoneReservee_Geometrie;
 
-    ASSOCIATION TypeZR_Document =
-      TypeZR -- {1..*} Type_ZoneReservee;
+    ASSOCIATION Type_Document =
+      Type -- {1..*} ZoneReservee_Type;
       Disposition -- {1..*} Document;
-    END TypeZR_Document;
+    END Type_Document;
 
     ASSOCIATION TypeZR_ZoneReservee =
-      ZoneReservee -- {1..*} ZoneReservee;
-      TypeZR -<> {1} Type_ZoneReservee;
+      Type -<> {1} ZoneReservee_Type;
+      Geometrie -- {1..*} ZoneReservee_Geometrie;
     END TypeZR_ZoneReservee;
+
 
     !! Conditions de cohérence
     !! -----------------------
 
     CONSTRAINTS OF Document =
+      !!@ ilivalid.msg = "Soit Titre_DE, soit Titre_FR doit être défini."
+      SET CONSTRAINT DEFINED (Titre_DE) OR DEFINED (Titre_FR);
+      !!@ ilivalid.msg = "Soit Nom_du_fichier_PDF_DE, soit Nom_du_fichier_PDF_FR doit être défini."
+      SET CONSTRAINT DEFINED (Nom_du_fichier_PDF_DE) OR DEFINED (Nom_du_fichier_PDF_FR);
       !!@ ilivalid.msg = "publieJusque doit être plus grand que publieDepuis."
       SET CONSTRAINT publieDepuis < publieJusque;
-      !! Pour les attributs bilingues, il faut indiquer si une entrée a été saisie dans la langue "de" ou "fr".
-      !! Si les deux langues sont saisies, une entrée doit impérativement être indiquée avec "de" et l'autre avec "fr".
-      UNIQUE (LOCAL) Titre: Language;
-      UNIQUE (LOCAL) Abreviation: Language;
-      UNIQUE (LOCAL) NoOfficiel: Language;
-      UNIQUE (LOCAL) Nom_du_fichier_PDF: Language;
     END;
 
-    CONSTRAINTS OF Type_ZoneReservee =
-      !! Pour les attributs bilingues, il faut indiquer si une entrée a été saisie dans la langue "de" ou "fr".
-      !! Si les deux langues sont saisies, une entrée doit impérativement être indiquée avec "de" et l'autre avec "fr".    
-      UNIQUE (LOCAL) Designation: Language;
-      UNIQUE (LOCAL) Abreviation: Language;
+    CONSTRAINTS OF ZoneReservee_Type =
+      !!@ ilivalid.msg = "Soit Designation_DE, soit Designation_FR doit être défini."
+      SET CONSTRAINT DEFINED (Designation_DE) OR DEFINED (Designation_FR);
+      !!@ ilivalid.msg = "Soit Abreviation_DE, soit Abreviation_FR doit être défini."
+      SET CONSTRAINT DEFINED (Abreviation_DE) OR DEFINED (Abreviation_FR);
     END;
 
-    CONSTRAINTS OF ZoneReservee =
+    CONSTRAINTS OF ZoneReservee_Geometrie =
       !!@ ilivalid.msg = "publieJusque doit être plus grand que publieDepuis."
       SET CONSTRAINT publieDepuis < publieJusque;
     END;
