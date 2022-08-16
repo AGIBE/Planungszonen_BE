@@ -16,6 +16,7 @@ MODEL Planungszonen_BE_V1_0 (de)
   AT "https://models.geo.be.ch/Grundlagen_und_Planung/Raumplanung_Grundstueckskataster/"
   VERSION "2022-08-01"  =
   IMPORTS GeometryCHLV95_V1;
+  IMPORTS Text;
 
   DOMAIN
 
@@ -83,6 +84,10 @@ MODEL Planungszonen_BE_V1_0 (de)
       SET CONSTRAINT DEFINED (Titel_DE) OR DEFINED (Titel_FR);
       !!@ ilivalid.msg = "Entweder PDF_Dateiname_DE oder PDF_Dateiname_FR muss definiert sein."
       SET CONSTRAINT DEFINED (PDF_Dateiname_DE) OR DEFINED (PDF_Dateiname_FR);
+      !!@ ilivalid.msg = "PDF_Dateiname_DE darf nur Buchstaben (A-Z, a-z), Ziffern (0-9) und Unterstriche (_) sowie die Endung .pdf oder .PDF enthalten."
+      SET CONSTRAINT Text.matches(PDF_Dateiname_DE, "[0-9a-zA-Z_]+(.pdf|.PDF)$");
+      !!@ ilivalid.msg = "PDF_Dateiname_FR darf nur Buchstaben (A-Z, a-z), Ziffern (0-9) und Unterstriche (_) sowie die Endung .pdf oder .PDF enthalten."
+      SET CONSTRAINT Text.matches(PDF_Dateiname_FR, "[0-9a-zA-Z_]+(.pdf|.PDF)$");
       !!@ ilivalid.msg = "publiziertBis muss grösser sein als publiziertAb."
       SET CONSTRAINT publiziertAb < publiziertBis;
     END;

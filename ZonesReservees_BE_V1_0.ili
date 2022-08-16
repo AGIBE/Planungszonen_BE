@@ -16,6 +16,7 @@ MODEL ZonesReservees_BE_V1_0 (fr)
   VERSION "2022-08-01"
   TRANSLATION OF Planungszonen_BE_V1_0 ["2022-08-01"] =
   IMPORTS GeometryCHLV95_V1;
+  IMPORTS Text;
 
   DOMAIN
 
@@ -83,6 +84,10 @@ MODEL ZonesReservees_BE_V1_0 (fr)
       SET CONSTRAINT DEFINED (Titre_DE) OR DEFINED (Titre_FR);
       !!@ ilivalid.msg = "Soit Nom_du_fichier_PDF_DE, soit Nom_du_fichier_PDF_FR doit être défini."
       SET CONSTRAINT DEFINED (Nom_du_fichier_PDF_DE) OR DEFINED (Nom_du_fichier_PDF_FR);
+      !!@ ilivalid.msg = "Nom_du_fichier_PDF_DE ne peut contenir que des lettres (A-Z, a-z), des chiffres (0-9) et des traits de soulignement (_) ainsi que l'extension .pdf ou .PDF."
+      SET CONSTRAINT Text.matches(Nom_du_fichier_PDF_DE, "[0-9a-zA-Z_]+(.pdf|.PDF)$");
+      !!@ ilivalid.msg = "Nom_du_fichier_PDF_FR ne peut contenir que des lettres (A-Z, a-z), des chiffres (0-9) et des traits de soulignement (_) ainsi que l'extension .pdf ou .PDF."
+      SET CONSTRAINT Text.matches(Nom_du_fichier_PDF_FR, "[0-9a-zA-Z_]+(.pdf|.PDF)$");
       !!@ ilivalid.msg = "publieJusque doit être plus grand que publieDepuis."
       SET CONSTRAINT publieDepuis < publieJusque;
     END;
