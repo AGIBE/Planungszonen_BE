@@ -16,7 +16,7 @@
       <Planungszonen_BE_V1_0.Planungszonen.Dokument TID="dda3e623-a560-414d-91f9-31cbc95ed032">
         <Art_Rechtlich>Rechtsvorschrift</Art_Rechtlich>
         <Titel_DE>Reglement der Planungszone xy</Titel_DE>
-        <Titel_DE>Règlement de la zone réservée xy</Titel_DE>
+        <Titel_FR>Règlement de la zone réservée xy</Titel_FR>
         <Abkuerzung_DE>PZ xy</Abkuerzung_DE>
         <Abkuerzung_FR>ZR xy</Abkuerzung_FR>
         <OffizielleNr_DE>abc.1.2.3</OffizielleNr_DE>

@@ -16,7 +16,7 @@
       <ZonesReservees_BE_V1_0.ZonesReservees.Document TID="dda3e623-a560-414d-91f9-31cbc95ed032">
         <Genre_legal>disposition_juridique</Genre_legal>
         <Titre_DE>Reglement der Planungszone xy</Titre_DE>
-        <Titre_DE>Règlement de la zone réservée xy</Titre_DE>
+        <Titre_FR>Règlement de la zone réservée xy</Titre_FR>
         <Abreviation_DE>PZ xy</Abreviation_DE>
         <Abreviation_FR>ZR xy</Abreviation_FR>
         <NoOfficiel_DE>abc.1.2.3</NoOfficiel_DE>
