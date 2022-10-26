@@ -5,7 +5,7 @@ INTERLIS 2.3;
 
 !! Version    | Who   | Modification
 !!------------------------------------------------------------------------------
-!! 2022-08-01 | OACOT | Version 1.0
+!! 2022-10-25 | OACOT | Version 1.0
 !!------------------------------------------------------------------------------
 
 !!@ technicalContact=mailto:OundR.AGR@be.ch
@@ -13,10 +13,11 @@ INTERLIS 2.3;
 
 MODEL ZonesReservees_BE_V1_0 (fr)
   AT "https://models.geo.be.ch/Grundlagen_und_Planung/Raumplanung_Grundstueckskataster/"
-  VERSION "2022-08-01"
-  TRANSLATION OF Planungszonen_BE_V1_0 ["2022-08-01"] =
+  VERSION "2022-10-25"
+  TRANSLATION OF Planungszonen_BE_V1_0 ["2022-10-25"] =
   IMPORTS GeometryCHLV95_V1;
   IMPORTS Text;
+  IMPORTS Math;
 
   DOMAIN
 
@@ -81,27 +82,29 @@ MODEL ZonesReservees_BE_V1_0 (fr)
 
     CONSTRAINTS OF Document =
       !!@ ilivalid.msg = "Soit Titre_DE, soit Titre_FR doit être défini."
-      SET CONSTRAINT DEFINED (Titre_DE) OR DEFINED (Titre_FR);
+      MANDATORY CONSTRAINT DEFINED (Titre_DE) OR DEFINED (Titre_FR);
       !!@ ilivalid.msg = "Soit Nom_du_fichier_PDF_DE, soit Nom_du_fichier_PDF_FR doit être défini."
-      SET CONSTRAINT DEFINED (Nom_du_fichier_PDF_DE) OR DEFINED (Nom_du_fichier_PDF_FR);
-      !!@ ilivalid.msg = "Nom_du_fichier_PDF_DE ne peut contenir que des lettres (A-Z, a-z), des chiffres (0-9) et des traits de soulignement (_) ainsi que l'extension .pdf ou .PDF."
-      SET CONSTRAINT Text.matches(Nom_du_fichier_PDF_DE, "[0-9a-zA-Z_]+(.pdf|.PDF)$");
-      !!@ ilivalid.msg = "Nom_du_fichier_PDF_FR ne peut contenir que des lettres (A-Z, a-z), des chiffres (0-9) et des traits de soulignement (_) ainsi que l'extension .pdf ou .PDF."
-      SET CONSTRAINT Text.matches(Nom_du_fichier_PDF_FR, "[0-9a-zA-Z_]+(.pdf|.PDF)$");
-      !!@ ilivalid.msg = "publieJusque doit être plus grand que publieDepuis."
-      SET CONSTRAINT publieDepuis < publieJusque;
+      MANDATORY CONSTRAINT DEFINED (Nom_du_fichier_PDF_DE) OR DEFINED (Nom_du_fichier_PDF_FR);
+      !!@ ilivalid.msg = "Nom_du_fichier_PDF_DE ne peut contenir que des lettres (A-Z, a-z), des chiffres (0-9) et des traits de soulignement (_) ainsi que l'extension .pdf ou .PDF: {PDF_Dateiname_DE}."
+      MANDATORY CONSTRAINT Text.matches(Nom_du_fichier_PDF_DE, "[0-9a-zA-Z_]+(.pdf|.PDF)$");
+      !!@ ilivalid.msg = "Nom_du_fichier_PDF_FR ne peut contenir que des lettres (A-Z, a-z), des chiffres (0-9) et des traits de soulignement (_) ainsi que l'extension .pdf ou .PDF: {PDF_Dateiname_FR}."
+      MANDATORY CONSTRAINT Text.matches(Nom_du_fichier_PDF_FR, "[0-9a-zA-Z_]+(.pdf|.PDF)$");
+      !!@ ilivalid.msg = "La date publieJusque ({publieJusque}) doit être postérieure d'au moins deux ans à la date publieDepuis ({publieDepuis})."
+      MANDATORY CONSTRAINT Math.sub(Math.add(Math.sub(Math.add(Math.mul(365.25,Math.add(Text.substring(publieJusque, 0, 4),4716)),Math.mul(30.6001,Math.add(Text.substring(publieJusque, 5, 7),1))),1524.5),Text.substring(publieJusque, 8, 10)),
+                                    Math.add(Math.sub(Math.add(Math.mul(365.25,Math.add(Text.substring(publieDepuis, 0, 4),4716)),Math.mul(30.6001,Math.add(Text.substring(publieDepuis, 5, 7),1))),1524.5),Text.substring(publieDepuis, 8, 10))) > Math.mul(2, 364);
     END;
 
     CONSTRAINTS OF ZoneReservee_Type =
       !!@ ilivalid.msg = "Soit Designation_DE, soit Designation_FR doit être défini."
-      SET CONSTRAINT DEFINED (Designation_DE) OR DEFINED (Designation_FR);
+      MANDATORY CONSTRAINT DEFINED (Designation_DE) OR DEFINED (Designation_FR);
       !!@ ilivalid.msg = "Soit Abreviation_DE, soit Abreviation_FR doit être défini."
-      SET CONSTRAINT DEFINED (Abreviation_DE) OR DEFINED (Abreviation_FR);
+      MANDATORY CONSTRAINT DEFINED (Abreviation_DE) OR DEFINED (Abreviation_FR);
     END;
 
     CONSTRAINTS OF ZoneReservee_Geometrie =
-      !!@ ilivalid.msg = "publieJusque doit être plus grand que publieDepuis."
-      SET CONSTRAINT publieDepuis < publieJusque;
+      !!@ ilivalid.msg = "La date publieJusque ({publieJusque}) doit être postérieure d'au moins deux ans à la date publieDepuis ({publieDepuis})."
+      MANDATORY CONSTRAINT Math.sub(Math.add(Math.sub(Math.add(Math.mul(365.25,Math.add(Text.substring(publieJusque, 0, 4),4716)),Math.mul(30.6001,Math.add(Text.substring(publieJusque, 5, 7),1))),1524.5),Text.substring(publieJusque, 8, 10)),
+                                    Math.add(Math.sub(Math.add(Math.mul(365.25,Math.add(Text.substring(publieDepuis, 0, 4),4716)),Math.mul(30.6001,Math.add(Text.substring(publieDepuis, 5, 7),1))),1524.5),Text.substring(publieDepuis, 8, 10))) > Math.mul(2, 364);
     END;
 
   END ZonesReservees;

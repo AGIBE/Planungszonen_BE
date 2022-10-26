@@ -6,7 +6,7 @@ INTERLIS 2.3;
 
 !! Version    | Who   | Modification
 !!------------------------------------------------------------------------------
-!! 2022-08-01 | AGR   | Version 1.0
+!! 2022-10-25 | AGR   | Version 1.0
 !!------------------------------------------------------------------------------
 
 !!@ technicalContact=mailto:OundR.AGR@be.ch
@@ -14,9 +14,10 @@ INTERLIS 2.3;
 
 MODEL Planungszonen_BE_V1_0 (de)
   AT "https://models.geo.be.ch/Grundlagen_und_Planung/Raumplanung_Grundstueckskataster/"
-  VERSION "2022-08-01"  =
+  VERSION "2022-10-25"  =
   IMPORTS GeometryCHLV95_V1;
   IMPORTS Text;
+  IMPORTS Math;
 
   DOMAIN
 
@@ -81,27 +82,29 @@ MODEL Planungszonen_BE_V1_0 (de)
 
     CONSTRAINTS OF Dokument =
       !!@ ilivalid.msg = "Entweder Titel_DE oder Titel_FR muss definiert sein."
-      SET CONSTRAINT DEFINED (Titel_DE) OR DEFINED (Titel_FR);
+      MANDATORY CONSTRAINT DEFINED (Titel_DE) OR DEFINED (Titel_FR);
       !!@ ilivalid.msg = "Entweder PDF_Dateiname_DE oder PDF_Dateiname_FR muss definiert sein."
-      SET CONSTRAINT DEFINED (PDF_Dateiname_DE) OR DEFINED (PDF_Dateiname_FR);
-      !!@ ilivalid.msg = "PDF_Dateiname_DE darf nur Buchstaben (A-Z, a-z), Ziffern (0-9) und Unterstriche (_) sowie die Endung .pdf oder .PDF enthalten."
-      SET CONSTRAINT Text.matches(PDF_Dateiname_DE, "[0-9a-zA-Z_]+(.pdf|.PDF)$");
-      !!@ ilivalid.msg = "PDF_Dateiname_FR darf nur Buchstaben (A-Z, a-z), Ziffern (0-9) und Unterstriche (_) sowie die Endung .pdf oder .PDF enthalten."
-      SET CONSTRAINT Text.matches(PDF_Dateiname_FR, "[0-9a-zA-Z_]+(.pdf|.PDF)$");
-      !!@ ilivalid.msg = "publiziertBis muss grösser sein als publiziertAb."
-      SET CONSTRAINT publiziertAb < publiziertBis;
+      MANDATORY CONSTRAINT DEFINED (PDF_Dateiname_DE) OR DEFINED (PDF_Dateiname_FR);
+      !!@ ilivalid.msg = "PDF_Dateiname_DE darf nur Buchstaben (A-Z, a-z), Ziffern (0-9) und Unterstriche (_) sowie die Endung .pdf oder .PDF enthalten: {PDF_Dateiname_DE}."
+      MANDATORY CONSTRAINT Text.matches(PDF_Dateiname_DE, "[0-9a-zA-Z_]+(.pdf|.PDF)$");
+      !!@ ilivalid.msg = "PDF_Dateiname_FR darf nur Buchstaben (A-Z, a-z), Ziffern (0-9) und Unterstriche (_) sowie die Endung .pdf oder .PDF enthalten: {PDF_Dateiname_FR}."
+      MANDATORY CONSTRAINT Text.matches(PDF_Dateiname_FR, "[0-9a-zA-Z_]+(.pdf|.PDF)$");
+      !!@ ilivalid.msg = "publiziertBis ({publiziertBis}) muss mindestens zwei Jahre nach publiziertAb ({publiziertAb}) liegen."
+      MANDATORY CONSTRAINT Math.sub(Math.add(Math.sub(Math.add(Math.mul(365.25,Math.add(Text.substring(publiziertBis, 0, 4),4716)),Math.mul(30.6001,Math.add(Text.substring(publiziertBis, 5, 7),1))),1524.5),Text.substring(publiziertBis, 8, 10)),
+                                    Math.add(Math.sub(Math.add(Math.mul(365.25,Math.add(Text.substring(publiziertAb, 0, 4),4716)),Math.mul(30.6001,Math.add(Text.substring(publiziertAb, 5, 7),1))),1524.5),Text.substring(publiziertAb, 8, 10))) > Math.mul(2, 364);
     END;
 
     CONSTRAINTS OF Planungszone_Typ =
       !!@ ilivalid.msg = "Entweder Bezeichnung_DE oder Bezeichnung_FR muss definiert sein."
-      SET CONSTRAINT DEFINED (Bezeichnung_DE) OR DEFINED (Bezeichnung_FR);
+      MANDATORY CONSTRAINT DEFINED (Bezeichnung_DE) OR DEFINED (Bezeichnung_FR);
       !!@ ilivalid.msg = "Entweder Abkuerzung_DE oder Abkuerzung_FR muss definiert sein."
-      SET CONSTRAINT DEFINED (Abkuerzung_DE) OR DEFINED (Abkuerzung_FR);
+      MANDATORY CONSTRAINT DEFINED (Abkuerzung_DE) OR DEFINED (Abkuerzung_FR);
     END;
 
     CONSTRAINTS OF Planungszone_Geometrie =
-      !!@ ilivalid.msg = "publiziertBis muss grösser sein als publiziertAb."
-      SET CONSTRAINT publiziertAb < publiziertBis;
+      !!@ ilivalid.msg = "publiziertBis ({publiziertBis}) muss mindestens zwei Jahre nach publiziertAb ({publiziertAb}) liegen."
+      MANDATORY CONSTRAINT Math.sub(Math.add(Math.sub(Math.add(Math.mul(365.25,Math.add(Text.substring(publiziertBis, 0, 4),4716)),Math.mul(30.6001,Math.add(Text.substring(publiziertBis, 5, 7),1))),1524.5),Text.substring(publiziertBis, 8, 10)),
+                                    Math.add(Math.sub(Math.add(Math.mul(365.25,Math.add(Text.substring(publiziertAb, 0, 4),4716)),Math.mul(30.6001,Math.add(Text.substring(publiziertAb, 5, 7),1))),1524.5),Text.substring(publiziertAb, 8, 10))) > Math.mul(2, 364);
     END;
 
   END Planungszonen;
