@@ -5,7 +5,7 @@ INTERLIS 2.3;
 
 !! Version    | Who   | Modification
 !!------------------------------------------------------------------------------
-!! 2022-10-25 | OACOT | Version 1.0
+!! 2022-12-09 | OACOT | Version 1.0
 !!------------------------------------------------------------------------------
 
 !!@ technicalContact=mailto:OundR.AGR@be.ch
@@ -13,7 +13,7 @@ INTERLIS 2.3;
 
 MODEL ZonesReservees_BE_V1_0 (fr)
   AT "https://models.geo.be.ch/Grundlagen_und_Planung/Raumplanung_Grundstueckskataster/"
-  VERSION "2022-10-25"
+  VERSION "2022-12-09"
   TRANSLATION OF Planungszonen_BE_V1_0 ["2022-10-25"] =
   IMPORTS GeometryCHLV95_V1;
   IMPORTS Text;
