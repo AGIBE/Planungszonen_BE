@@ -71,10 +71,10 @@ MODEL ZonesReservees_BE_V1_0 (fr)
       Disposition -- {1..*} Document;
     END Type_Document;
 
-    ASSOCIATION TypeZR_ZoneReservee =
+    ASSOCIATION Type_Geometrie =
       Type -<> {1} ZoneReservee_Type;
       Geometrie -- {1..*} ZoneReservee_Geometrie;
-    END TypeZR_ZoneReservee;
+    END Type_Geometrie;
 
 
     !! Conditions de cohérence
